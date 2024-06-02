@@ -31,6 +31,20 @@ const updateTask = async (req, res) => {
   }
 };
 
+const updateCompletedField = async (req, res) => {
+  const { id } = req.params;
+
+  const updatedTask = await Task.findOneAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
+
+  if (!updatedTask) {
+    throw HttpError(404, "Not found");
+  }
+
+  res.json(updatedToDo);
+};
+
 const deleteTaskById = async (req, res) => {
   const { id } = req.params;
   console.log("Received request to delete task with ID:", id);
@@ -48,4 +62,5 @@ module.exports = {
   createTask: ctrlWrapper(createTask),
   deleteTaskById: ctrlWrapper(deleteTaskById),
   updateTask: ctrlWrapper(updateTask),
+  updateCompletedField: ctrlWrapper(updateCompletedField),
 };

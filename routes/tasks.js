@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/", ctrl.getAllTasks);
 router.post("/", validateBody(schemas.taskJoiSchema), ctrl.createTask);
 router.put("/:id", validateBody(schemas.taskJoiSchema), ctrl.updateTask);
+router.patch("/:id/completed", ctrl.updateCompletedField);
 router.delete("/:id", ctrl.deleteTaskById);
 
 module.exports = router;
