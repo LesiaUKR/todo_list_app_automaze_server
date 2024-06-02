@@ -26,7 +26,8 @@ const updateTaskById = async (req, res) => {
 };
 
 const deleteTaskById = async (req, res) => {
-  const { id } = req.headers;
+  const { id } = req.params;
+  console.log("Received request to delete task with ID:", id);
   const result = await Task.findByIdAndDelete(id);
   if (!result) {
     throw HttpError(404, "Not found");
