@@ -16,19 +16,18 @@ const createTask = async (req, res) => {
   res.status(201).json(result);
 };
 
-const updateTaskById = async (req, res) => {
+const updateTask = async (req, res) => {
   const { id } = req.params;
-  const updates = req.body; // Use entire req.body as updates
 
-  const result = await Task.findByIdAndUpdate(
-    id,
-    updates, // Update with updates
-    { new: true }
-  );
-  if (!result) {
+  const updatedTask = await Task.findOneAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
+
+  if (!updatedTask) {
     throw HttpError(404, "Not found");
   }
-  res.json(result);
+
+  res.json(updatedToDo);
 };
 
 const deleteTaskById = async (req, res) => {
@@ -47,5 +46,5 @@ module.exports = {
   getAllTasks: ctrlWrapper(getAllTasks),
   createTask: ctrlWrapper(createTask),
   deleteTaskById: ctrlWrapper(deleteTaskById),
-  updateTaskById: ctrlWrapper(updateTaskById),
+  updateTask: ctrlWrapper(updateTask),
 };
