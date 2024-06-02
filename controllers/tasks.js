@@ -42,7 +42,7 @@ const updateCompletedField = async (req, res) => {
     throw HttpError(404, "Not found");
   }
 
-  res.json(updatedToDo);
+  res.json(updatedTask);
 };
 
 const deleteTaskById = async (req, res) => {
