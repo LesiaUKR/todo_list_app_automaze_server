@@ -47,5 +47,5 @@ module.exports = {
   getAllTasks: ctrlWrapper(getAllTasks),
   createTask: ctrlWrapper(createTask),
   deleteTaskById: ctrlWrapper(deleteTaskById),
-  updateTaskById: ctrlWrapper(updateCompletedTaskById),
+  updateCompletedTaskById: ctrlWrapper(updateCompletedTaskById),
 };
