@@ -18,16 +18,17 @@ const createTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   const { id } = req.params;
-
-  const updatedTask = await Task.findOneAndUpdate({ _id: id }, req.body, {
-    new: true,
-  });
-
-  if (!updatedTask) {
-    throw HttpError(404, "Not found");
+  try {
+    const updatedTask = await Task.findOneAndUpdate({ _id: id }, req.body, {
+      new: true,
+    });
+    if (!updatedTask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+    res.json(updatedTask);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-
-  res.json(updatedToDo);
 };
 
 const deleteTaskById = async (req, res) => {
