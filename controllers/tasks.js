@@ -18,13 +18,16 @@ const createTask = async (req, res) => {
 
 const updateCompletedTaskById = async (req, res) => {
   const { id } = req.params;
-  const { completed, ...updates } = req.body; // Виокремлюємо поле completed
+  console.log("Request body:", req.body);
+  console.log("Received PATCH request at URL:", req.originalUrl);
+  const { completed } = req.body; // Extract completed from req.body
+  console.log("Received request to update task with ID:", id);
 
   const result = await Task.findByIdAndUpdate(
     id,
-    { ...updates, completed },
+    { completed }, // Only update completed
     { new: true }
-  ); // Додаємо completed до оновлень
+  );
   if (!result) {
     throw HttpError(404, "Not found");
   }
