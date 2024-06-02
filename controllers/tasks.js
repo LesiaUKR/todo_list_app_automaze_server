@@ -16,10 +16,15 @@ const createTask = async (req, res) => {
   res.status(201).json(result);
 };
 
-const updateTaskById = async (req, res) => {
+const updateCompletedTaskById = async (req, res) => {
   const { id } = req.params;
-  const updates = req.body;
-  const result = await Task.findByIdAndUpdate(id, updates, { new: true });
+  const { completed, ...updates } = req.body; // Виокремлюємо поле completed
+
+  const result = await Task.findByIdAndUpdate(
+    id,
+    { ...updates, completed },
+    { new: true }
+  ); // Додаємо completed до оновлень
   if (!result) {
     throw HttpError(404, "Not found");
   }
@@ -42,5 +47,5 @@ module.exports = {
   getAllTasks: ctrlWrapper(getAllTasks),
   createTask: ctrlWrapper(createTask),
   deleteTaskById: ctrlWrapper(deleteTaskById),
-  updateTaskById: ctrlWrapper(updateTaskById),
+  updateTaskById: ctrlWrapper(updateCompletedTaskById),
 };

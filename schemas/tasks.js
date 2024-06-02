@@ -13,7 +13,6 @@ const taskJoiSchema = Joi.object({
   completed: Joi.boolean().required().messages({
     "any.required": "Set completed status",
   }),
-
   priority: Joi.number().integer().min(1).max(10).required().messages({
     "any.required": "Set task priority",
     "number.min": "Priority must be at least 1",
