@@ -18,10 +18,6 @@ const taskSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    important: {
-      type: Boolean,
-      default: false,
-    },
     priority: {
       type: Number,
       min: 1,
