@@ -16,16 +16,13 @@ const createTask = async (req, res) => {
   res.status(201).json(result);
 };
 
-const updateCompletedTaskById = async (req, res) => {
+const updateTaskById = async (req, res) => {
   const { id } = req.params;
-  console.log("Request body:", req.body);
-  console.log("Received PATCH request at URL:", req.originalUrl);
-  const { completed } = req.body; // Extract completed from req.body
-  console.log("Received request to update task with ID:", id);
+  const updates = req.body; // Use entire req.body as updates
 
   const result = await Task.findByIdAndUpdate(
     id,
-    { completed }, // Only update completed
+    updates, // Update with updates
     { new: true }
   );
   if (!result) {
@@ -50,5 +47,5 @@ module.exports = {
   getAllTasks: ctrlWrapper(getAllTasks),
   createTask: ctrlWrapper(createTask),
   deleteTaskById: ctrlWrapper(deleteTaskById),
-  updateCompletedTaskById: ctrlWrapper(updateCompletedTaskById),
+  updateTaskById: ctrlWrapper(updateTaskById),
 };
