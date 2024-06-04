@@ -5,6 +5,8 @@
 > [!NOTE]
 > Keep in mind the backend hosted on the free provider [Render](https://render.com/) and it is needed up to two minutes for it "to wake up" and download data from DB.
 
+![Presentation](./assets/final%20project.jpg)
+
 ## Technologies
 
 The project was created on the [Node.js](https://nodejs.org/en/docs/) platform using [Express](https://devdocs.io/express/) framework
